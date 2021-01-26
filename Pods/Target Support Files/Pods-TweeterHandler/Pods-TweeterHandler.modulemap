@@ -1,0 +1,6 @@
+framework module Pods_TweeterHandler {
+  umbrella header "Pods-TweeterHandler-umbrella.h"
+
+  export *
+  module * { export * }
+}
