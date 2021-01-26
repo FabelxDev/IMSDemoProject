@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+//statuses/user_timeline
 
 
 class LoginViewController: UIViewController {
@@ -15,8 +15,7 @@ class LoginViewController: UIViewController {
         return LoginPresenter(view: self)
     }()
     @IBOutlet private weak var loginButton: UIButton!
-    @IBOutlet private weak var usernameTextField: UITextField!
-    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var usernameInputTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -25,11 +24,21 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginAction(_ sender: Any) {
-        presenter.login()
+        presenter.login(with: usernameInputTextField.text)
     }
+    
 }
 
 extension LoginViewController: LoginView {
+    
+    func navigateToUserDetails(usingDataTransport data: LoginResponse) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "UserProfile", bundle: nil)
+        guard let viewController = storyBoard.instantiateInitialViewController() as? UserProfileViewController else {
+            return
+        }
+        viewController.loginResponse = data
+        self.show(viewController, sender: self)
+    }
     
     func displayError(with title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -38,12 +47,10 @@ extension LoginViewController: LoginView {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func navigateToProfile() {
-        print("navigating...")
-    }
-    
     func setViews() {
-        print("setting views...")
+        loginButton.layer.cornerRadius = 10
+        loginButton.backgroundColor = .blue
+        loginButton.setTitleColor(.white, for: .normal)
     }
     
 }

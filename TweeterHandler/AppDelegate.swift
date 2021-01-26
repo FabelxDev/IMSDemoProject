@@ -29,3 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+struct APIResponse: Codable {
+    let search_metadata: AAPIResponse
+    let statuses: ABPIResponse
+}
+
+struct AAPIResponse: Codable {
+    
+}
+
+struct ABPIResponse: Codable {
+    let text: String
+}

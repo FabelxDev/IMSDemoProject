@@ -10,6 +10,6 @@ import Foundation
 
 struct LoginResponse: Codable {
     
-    let name: String
-    
+    let tweet: String
+    let profile: String
 }

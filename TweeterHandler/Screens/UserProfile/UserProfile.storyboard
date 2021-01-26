@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L8x-g9-i7b">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -49,6 +49,10 @@
                             <constraint firstItem="nr1-9Q-kzP" firstAttribute="top" secondItem="rHS-Vq-aCX" secondAttribute="top" id="v60-Jf-gIU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lastTweetLabel" destination="1pC-cu-YRo" id="VSg-q3-TJj"/>
+                        <outlet property="profileImageView" destination="rHS-Vq-aCX" id="FJk-qf-VUS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rk2-Q1-98H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -43,6 +43,7 @@ PODS:
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
   - PromisesObjC (1.2.12)
+  - SwiftyJSON (5.0.0)
   - TwitterCore (3.2.0)
   - TwitterKit (3.4.2):
     - TwitterCore (>= 3.2.0)
@@ -50,6 +51,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Firebase/Auth
+  - SwiftyJSON
   - TwitterKit
 
 SPEC REPOS:
@@ -64,6 +66,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - nanopb
     - PromisesObjC
+    - SwiftyJSON
     - TwitterCore
     - TwitterKit
 
@@ -78,9 +81,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: d5886cd1580c70931249848c136a0468ef8ef810
+PODFILE CHECKSUM: 61c1a73ef29246938266afc259f9b28bb52d9e00
 
 COCOAPODS: 1.10.0

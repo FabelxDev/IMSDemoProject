@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1FB555DACEA9762011C9BF5A /* Pods_TweeterHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938270719ACA825176CC2136 /* Pods_TweeterHandler.framework */; };
+		7C0EFBF025C0BC9300072B00 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0EFBEF25C0BC9300072B00 /* UserProfilePresenter.swift */; };
+		7C0EFBF325C0BCB200072B00 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0EFBF225C0BCB100072B00 /* UserProfileView.swift */; };
+		7C0EFBF625C0BDC100072B00 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0EFBF525C0BDC100072B00 /* UIImageView+Extensions.swift */; };
 		7CCC2D6F25BC20450076DE1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC2D6E25BC20450076DE1A /* AppDelegate.swift */; };
 		7CCC2D7325BC20450076DE1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC2D7225BC20450076DE1A /* ViewController.swift */; };
 		7CCC2D7625BC20450076DE1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CCC2D7425BC20450076DE1A /* Main.storyboard */; };
@@ -36,6 +39,9 @@
 /* Begin PBXFileReference section */
 		2BDBA35140F7774514FCBEEF /* Pods-TweeterHandler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeterHandler.release.xcconfig"; path = "Target Support Files/Pods-TweeterHandler/Pods-TweeterHandler.release.xcconfig"; sourceTree = "<group>"; };
 		4A8B1448D83E3EA72814325F /* Pods-TweeterHandler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TweeterHandler.debug.xcconfig"; path = "Target Support Files/Pods-TweeterHandler/Pods-TweeterHandler.debug.xcconfig"; sourceTree = "<group>"; };
+		7C0EFBEF25C0BC9300072B00 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
+		7C0EFBF225C0BCB100072B00 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		7C0EFBF525C0BDC100072B00 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		7CCC2D6B25BC20450076DE1A /* TweeterHandler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweeterHandler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CCC2D6E25BC20450076DE1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CCC2D7225BC20450076DE1A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +143,8 @@
 			children = (
 				7CCC2E1725BF636E0076DE1A /* UserProfile.storyboard */,
 				7CCC2E1A25BF638E0076DE1A /* UserProfileViewController.swift */,
+				7C0EFBEF25C0BC9300072B00 /* UserProfilePresenter.swift */,
+				7C0EFBF225C0BCB100072B00 /* UserProfileView.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -156,6 +164,7 @@
 		7CCC2D9425BC26D20076DE1A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7C0EFBF525C0BDC100072B00 /* UIImageView+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -370,14 +379,17 @@
 				7CCC2D8C25BC24AA0076DE1A /* LoginPresenter.swift in Sources */,
 				7CCC2D8925BC24A20076DE1A /* LoginViewController.swift in Sources */,
 				7CCC2DC625BC52380076DE1A /* APIClient+Extensions.swift in Sources */,
+				7C0EFBF325C0BCB200072B00 /* UserProfileView.swift in Sources */,
 				7CCC2E1B25BF638E0076DE1A /* UserProfileViewController.swift in Sources */,
 				7CCC2D7325BC20450076DE1A /* ViewController.swift in Sources */,
 				7CCC2DB725BC29010076DE1A /* LoginResponse.swift in Sources */,
 				7CCC2DBC25BC4F410076DE1A /* APIClient.swift in Sources */,
+				7C0EFBF625C0BDC100072B00 /* UIImageView+Extensions.swift in Sources */,
 				7CCC2D8F25BC24B10076DE1A /* LoginView.swift in Sources */,
 				7CCC2DAB25BC28270076DE1A /* UseCase.swift in Sources */,
 				7CCC2D6F25BC20450076DE1A /* AppDelegate.swift in Sources */,
 				7CCC2DCD25BDBE8D0076DE1A /* CustomSafariViewController.swift in Sources */,
+				7C0EFBF025C0BC9300072B00 /* UserProfilePresenter.swift in Sources */,
 				7CCC2E1525BF4F1B0076DE1A /* UserProfile.swift in Sources */,
 				7CCC2DA825BC27E00076DE1A /* LoginUseCase.swift in Sources */,
 				7CCC2DC325BC51AE0076DE1A /* APIConfigs.swift in Sources */,
