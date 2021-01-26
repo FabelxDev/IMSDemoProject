@@ -8,8 +8,12 @@
 import Foundation
 
 
-struct LoginResponse: Codable {
-    
-    let tweet: String
-    let profile: String
+struct GetLastTweetResponse: Codable {
+    var tweet: String
 }
+
+struct ProfilePictureResponse: Codable {
+    var pictureURL: String
+}
+
+

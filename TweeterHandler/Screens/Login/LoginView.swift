@@ -10,5 +10,5 @@ import Foundation
 protocol LoginView: class {
     func displayError(with title: String, message: String)
     func setViews()
-    func navigateToUserDetails(usingDataTransport data: LoginResponse)
+    func navigateToUserDetails(usingDataTransport tweet: GetLastTweetResponse, pictureURL: ProfilePictureResponse)
 }

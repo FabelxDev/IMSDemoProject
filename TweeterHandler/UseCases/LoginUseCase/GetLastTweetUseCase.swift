@@ -1,5 +1,5 @@
 //
-//  LoginUseCase.swift
+//  GetLastTweetUseCase.swift
 //  TweeterHandler
 //
 //  Created by Joseph Tamas on 23/01/2021.
@@ -10,12 +10,12 @@ import SwiftyJSON
 import TwitterKit
 
 
-class LoginUseCase: UseCase {
+class GetLastTweetUseCase: UseCase {
     
-    private let handler: LoginPresentation
+    private let handler: GetLastTweetPresentation
     private let request: String
     
-    init(handler: LoginPresentation, request: String) {
+    init(handler: GetLastTweetPresentation, request: String) {
         self.handler = handler
         self.request = request
     }
@@ -30,22 +30,21 @@ class LoginUseCase: UseCase {
         if error == nil {
             client.sendTwitterRequest(request) { (response, data, error) in
                 if let error = error {
-                    self.handler.handleUserAuthenticationFailure(error: error)
+                    self.handler.handleFailure(error: error)
                     return
                 }
                 guard let data = data else {
                     let error = NSError(domain: "No data received", code: -999, userInfo: nil)
-                    self.handler.handleUserAuthenticationFailure(error: error)
+                    self.handler.handleFailure(error: error)
                     return
                 }
                 do {
                     let json = try JSON(data: data)
                     let lastTweet = json[0]["text"].stringValue
-                    let profileImageUrl = json[0]["user"]["profile_image_url"].stringValue
-                    let apiResponse = LoginResponse(tweet: lastTweet, profile: profileImageUrl)
-                    self.handler.handleUserAuthenticationSuccessful(response: apiResponse)
+                    let apiResponse = GetLastTweetResponse(tweet: lastTweet)
+                    self.handler.handleSuccess(response: apiResponse)
                 } catch (let error) {
-                    self.handler.handleUserAuthenticationFailure(error: error)
+                    self.handler.handleFailure(error: error)
                 }
                 
             }

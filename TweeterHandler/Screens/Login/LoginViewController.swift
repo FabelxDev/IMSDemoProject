@@ -31,12 +31,13 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginView {
     
-    func navigateToUserDetails(usingDataTransport data: LoginResponse) {
+    func navigateToUserDetails(usingDataTransport tweet: GetLastTweetResponse, pictureURL: ProfilePictureResponse) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "UserProfile", bundle: nil)
         guard let viewController = storyBoard.instantiateInitialViewController() as? UserProfileViewController else {
             return
         }
-        viewController.loginResponse = data
+        viewController.lastTweetResponse = tweet
+        viewController.profilePictureResponse = pictureURL
         self.show(viewController, sender: self)
     }
     
@@ -49,7 +50,7 @@ extension LoginViewController: LoginView {
     
     func setViews() {
         loginButton.layer.cornerRadius = 10
-        loginButton.backgroundColor = .blue
+        loginButton.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1.0)
         loginButton.setTitleColor(.white, for: .normal)
     }
     

@@ -17,7 +17,8 @@ class UserProfileViewController: UIViewController {
         return UserProfilePresenter(view: self)
     }()
     
-    var loginResponse: LoginResponse!
+    var lastTweetResponse: GetLastTweetResponse!
+    var profilePictureResponse: ProfilePictureResponse!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +30,8 @@ class UserProfileViewController: UIViewController {
 extension UserProfileViewController: UserProfileView {
     
     func setViews() {
-        lastTweetLabel.text = loginResponse.tweet.isEmpty ? "" : loginResponse.tweet
-        let url = URL(string: loginResponse.profile)
+        lastTweetLabel.text = lastTweetResponse.tweet.isEmpty ? "N/A" : "\"\(lastTweetResponse.tweet)\""
+        let url = URL(string: profilePictureResponse.pictureURL)
         profileImageView.load(url: url!)
     }
 }

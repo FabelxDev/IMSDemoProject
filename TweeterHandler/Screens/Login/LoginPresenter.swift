@@ -6,12 +6,18 @@
 //
 
 import Foundation
+import TwitterKit
 
 
 class LoginPresenter {
     
     private weak var view: LoginView?
-    private var loginUseCase: LoginUseCase?
+    private var getLastTweetUseCase: GetLastTweetUseCase?
+    private var getProfilePictureUseCase: GetProfilePictureUseCase?
+    #warning("I know I know... :D time was precious here (suggest Queue?")
+    private var numberOfFulfilledRequests = 0
+    private var profileResponse = ProfilePictureResponse(pictureURL: "")
+    private var lastTweetResponse = GetLastTweetResponse(tweet: "")
     
     init(view: LoginView) {
         self.view = view
@@ -22,127 +28,49 @@ class LoginPresenter {
     }
     
     func login(with username: String?) {
-        guard let username = username else {
+        guard let username = username, !username.isEmpty else {
             view?.displayError(with: "Empty field", message: "Please complete the field first.")
             return
         }
-        loginUseCase = LoginUseCase(handler: self, request: username)
-        loginUseCase?.execute()
+        getLastTweetUseCase = GetLastTweetUseCase(handler: self, request: username)
+        getLastTweetUseCase?.execute()
+        
+        getProfilePictureUseCase = GetProfilePictureUseCase(handler: self, request: username)
+        getProfilePictureUseCase?.execute()
     }
-//
-//    private func fetchTwitterUser(withId: String) {
-//
-//        let client = TWTRAPIClient()
-//        client.loadUser(withID: withId) { (user, error) in
-//            if let error = error {
-//                self.view?.displayError(with: "Unable to fetch user", message: error.localizedDescription)
-//                return
-//            }
-//
-//            guard let user = user else {
-//                self.view?.displayError(with: "Unable to fetch user", message: "")
-//                return
-//            }
-//
-//            //            let profilePictureUrl = user.profileImageURL
-//            //            let name = user.screenName
-//            //            let userDetails = UserDetails(username: name, photoURL: profilePictureUrl, lastTweet: nil)
-//
-//            let twError:NSErrorPointer = nil
-//            let userId = user.userID
-//
-//            let client = TWTRAPIClient(userID: userId)
-//            let request = client.urlRequest(withMethod: "GET", urlString: "https://api.twitter.com/1.1/search/tweets.json", parameters: ["q":"from:tamas_joseph","result_type":"recent"], error: twError)
-//
-//            if twError == nil {
-//
-//                client.sendTwitterRequest(request, completion: { (response, data, error) -> Void in
-//
-//                    guard let data = data else { return }
-//                    do {
-//                        // make sure this JSON is in the format we expect
-//                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-//                            // try to read out a string array
-//                            if let tweets = json["statuses"] as? [String] {
-//                                let decoder = try JSONDecoder().decode(APIResponse.self, from: data)
-//                                print(decoder)
-//                                print(tweets)
-//                            }
-//                        }
-//                    } catch let error as NSError {
-//                        print("Failed to load: \(error.localizedDescription)")
-//                    }
-//                })
-//            }
-//        }
-//    }
+}
+
+extension LoginPresenter: GetLastTweetPresentation {
     
-//    private func fetchTwitterUser() {
-//        guard let session = currentSession else {
-//            return
-//        }
-//        let client = TWTRAPIClient()
-//        client.loadUser(withID: session.userID) { (user, error) in
-//            if let error = error {
-//                self.view?.displayError(with: "Unable to fetch user", message: error.localizedDescription)
-//                return
-//            }
-//
-//            guard let user = user else {
-//                self.view?.displayError(with: "Unable to fetch user", message: "")
-//                return
-//            }
-//
-//            //            let profilePictureUrl = user.profileImageURL
-//            //            let name = user.screenName
-//            //            let userDetails = UserDetails(username: name, photoURL: profilePictureUrl, lastTweet: nil)
-//
-//            let twError:NSErrorPointer = nil
-//            let userId = user.userID
-//
-//            let client = TWTRAPIClient(userID: userId)
-//            let request = client.urlRequest(withMethod: "GET", urlString: "https://api.twitter.com/1.1/search/tweets.json", parameters: nil, error: twError)
-//
-//            if twError == nil {
-//
-//                client.sendTwitterRequest(request, completion: { (response, data, error) -> Void in
-//
-//                    guard let data = data else { return }
-//                    do {
-//                        // make sure this JSON is in the format we expect
-//                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-//                            // try to read out a string array
-//                            if let tweets = json["statuses"] as? [String] {
-//                                let decoder = try JSONDecoder().decode(APIResponse.self, from: data)
-//                                print(tweets)
-//                            }
-//                        }
-//                    } catch let error as NSError {
-//                        print("Failed to load: \(error.localizedDescription)")
-//                    }
-//                })
-//            }
-//        }
-//    }
-//
-//    private func isValidInput(email: String, password: String) -> Bool {
-//        // add regex
-//        guard !email.isEmpty, !password.isEmpty else {
-//            return false
-//        }
-//        return true
-//    }
+    func handleSuccess(response: GetLastTweetResponse) {
+        numberOfFulfilledRequests += 1
+        lastTweetResponse.tweet = response.tweet
+        if numberOfFulfilledRequests > 1 {
+            numberOfFulfilledRequests = 0
+            view?.navigateToUserDetails(usingDataTransport: lastTweetResponse, pictureURL: profileResponse)
+        }
+    }
+    
+    func handleFailure(error: Error) {
+        numberOfFulfilledRequests = 0
+        view?.displayError(with: "Error", message: error.localizedDescription)
+    }
     
 }
 
-
-extension LoginPresenter: LoginPresentation {
+extension LoginPresenter: GetProfilePicturePresentation {
     
-    func handleUserAuthenticationSuccessful(response: LoginResponse) {
-        view?.navigateToUserDetails(usingDataTransport: response)
+    func handleSuccess(response: ProfilePictureResponse) {
+        numberOfFulfilledRequests += 1
+        profileResponse.pictureURL = response.pictureURL
+        if numberOfFulfilledRequests > 1 {
+            numberOfFulfilledRequests = 0
+            view?.navigateToUserDetails(usingDataTransport: lastTweetResponse, pictureURL: profileResponse)
+        }
     }
     
-    func handleUserAuthenticationFailure(error: Error) {
+    func handleProfileFetchFailure(error: Error) {
+        numberOfFulfilledRequests = 0
         view?.displayError(with: "Error", message: error.localizedDescription)
     }
     
